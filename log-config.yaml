@@ -1,0 +1,26 @@
+version: 1
+disable_existing_loggers: true
+formatters:
+  simple:
+    format: '%(asctime)s %(levelname)s %(name)s: %(message)s'
+    datefmt: '%Y-%m-%dT%H:%M:%S'
+    (): netscaler_api.common.log.UTCFormatter
+handlers:
+  devnull:
+    class: logging.NullHandler
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: simple
+loggers:
+  werkzeug:
+    level: INFO
+    handlers: [console]
+    propagate: false
+  netscaler_api:
+    level: DEBUG
+    handlers: [console]
+    propagate: false
+root:
+  level: WARNING
+  handlers: [console]

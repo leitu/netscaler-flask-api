@@ -1,0 +1,1 @@
+{ "loadbalance": "lb1-1-tr1.mhint","vip": "10.10.10.1", "clientid": "atu", "appservers": ["10.10.10.2","10.10.10.3"]}
