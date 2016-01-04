@@ -2,7 +2,7 @@ from flask import Flask
 from flask_restful import Api
 from flask_redis import FlaskRedis
 from netscaler_api.resources.task import Tasks, Task
-from netscaler_api.resources.loadbalance import Loadbalances, Loadbalance
+from netscaler_api.resources.loadbalance import Loadbalances, Loadbalance, Appservers, Appserver
 from netscaler_api.common.util import initialize_logging, construct_queue
 
 initialize_logging('log-config.yaml')
@@ -18,6 +18,10 @@ queue = construct_queue(app.config)
 api.add_resource(Tasks, '/v1/task/')
 api.add_resource(Task, '/v1/task/<string:task_id>')
 
-## Volume Routes
+## Loadbalance Routes
 api.add_resource(Loadbalances, '/v1/lb/')
-api.add_resource(Loadbalance, '/v1/lb/<string:loadbalance>')
+api.add_resource(Loadbalance, '/v1/lb/<string:lbvserver>')
+
+## Appserver Routes
+api.add_resource(Appservers, '/v1/lb/as/')
+api.add_resource(Appserver, '/v1/lb/as/<string:appserver>')
