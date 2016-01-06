@@ -16,8 +16,8 @@ class Base(Resource):
   def __init__(self):
     self.reqparse = reqparse.RequestParser()
     self.reqparse.add_argument('loadbalance', type=str, required=True)
+    self.reqparse.add_argument('user', type=str, required=True)
     self.uuid = str(uuid.uuid4())
-    self.user = 'joebloggs' # FIXME
     super(Base, self).__init__()
 
   def persist_and_send(self, name, action, args):
@@ -27,7 +27,7 @@ class Base(Resource):
     message = {
       'task_id': self.uuid,
       'status': 'init',
-      'user': self.user,
+      'user': args.pop('user'),
       'creation_time': datetime.utcnow().isoformat(),
       'loadbalance': args.pop('loadbalance'),
       'action': action,
